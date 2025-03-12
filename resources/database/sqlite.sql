@@ -2,88 +2,48 @@
 
 -- #{ table
 	-- #{ init
-		CREATE TABLE IF NOT EXISTS bans (
-			vk_post_id INTEGER DEFAULT NULL,
-			tg_post_id INTEGER DEFAULT NULL,
-			nickname TEXT,
-			by TEXT,
+		CREATE TABLE IF NOT EXISTS data (
+			id VARCHAR(255) PRIMARY KEY,
+			`by` VARCHAR(255),
 			reason TEXT,
-			confirmed INTEGER CHECK (confirmed IN (0, 1)) DEFAULT NULL,
-			created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-			kick_screen TEXT DEFAULT NULL
+			confirmed BOOLEAN DEFAULT FALSE,
+			trigger BOOLEAN DEFAULT FALSE,
+			created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 		);
 	-- #}
 -- #}
 
--- #{ bans
-	-- #{ add
-		-- # :nickname string
+-- #{ data
+	-- #{ get_all_pending_datas
+		SELECT * FROM data WHERE trigger = FALSE AND confirmed = FALSE;
+	-- #}
+
+	-- #{ get_data
+		-- # :id string
+		SELECT * FROM data WHERE id = :id;
+	-- #}
+
+	-- #{ ban
+		-- # :id string
 		-- # :by string
 		-- # :reason string
-		INSERT INTO bans(nickname, by, reason)
-		VALUES (:nickname, :by, :reason);
+		INSERT INTO data (id, `by`, reason, confirmed, trigger, created_at)
+		VALUES (:id, :by, :reason, FALSE, FALSE, CURRENT_TIMESTAMP)
+		ON CONFLICT(id) DO UPDATE SET
+			`by` = excluded.`by`,
+			reason = excluded.reason,
+			confirmed = FALSE,
+			trigger = FALSE,
+			created_at = CURRENT_TIMESTAMP;
 	-- #}
 
 	-- #{ confirm
-		-- # :nickname string
-		-- # :confirmed bool
-		UPDATE bans
-		SET confirmed = :confirmed
-		WHERE nickname = :nickname;
+		-- # :id string
+		UPDATE data SET confirmed = TRUE WHERE id = :id;
 	-- #}
 
-	-- #{ setKickScreen
-		-- # :nickname string
-		-- # :kick_screen string
-		UPDATE bans
-		SET kick_screen = :kick_screen
-		WHERE nickname = :nickname;
+	-- #{ trigger
+		-- # :id string
+		UPDATE data SET trigger = TRUE WHERE id = :id;
 	-- #}
-
-	-- #{ getData
-		-- # :nickname string
-		SELECT * FROM bans
-		WHERE nickname = :nickname
-	-- #}
-
-	-- #{ getDataByNickname
-		-- # :nickname string
-		SELECT * FROM bans
-		WHERE nickname = :nickname
-	-- #}
-
-	-- #{ getDataByVkPostId
-		-- # :post_id int
-		SELECT * FROM bans
-		WHERE vk_post_id = :post_id
-	-- #}
-
-	-- #{ getDataByTgPostId
-		-- # :post_id int
-		SELECT * FROM bans
-		WHERE tg_post_id = :post_id
-	-- #}
-
-	-- #{ setVkPostId
-		-- # :nickname string
-		-- # :post_id int
-		UPDATE bans
-		SET vk_post_id = :post_id
-		WHERE nickname = :nickname;
-	-- #}
-
-	-- #{ setTgPostId
-		-- # :nickname string
-		-- # :post_id int
-		UPDATE bans
-		SET tg_post_id = :post_id
-		WHERE nickname = :nickname;
-	-- #}
-
-	-- #{ remove
-		-- # :nickname string
-		DELETE FROM bans
-		WHERE nickname = :nickname;
-	-- #}
-
 -- #}

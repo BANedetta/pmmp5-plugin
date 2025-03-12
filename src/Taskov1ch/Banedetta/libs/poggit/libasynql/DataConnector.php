@@ -20,14 +20,14 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql;
 
 use Generator;
 use InvalidArgumentException;
 use Logger;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\generic\GenericStatementFileParseException;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\libs\SOFe\AwaitGenerator\Await;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlColumnInfo;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\generic\GenericStatementFileParseException;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\libs\SOFe\AwaitGenerator\Await;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlColumnInfo;
 
 /**
  * Represents a database connection or a group of database connections

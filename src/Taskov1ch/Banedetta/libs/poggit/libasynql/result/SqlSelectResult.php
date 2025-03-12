@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\result;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\result;
 
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlResult;
 
 class SqlSelectResult extends SqlResult
 {

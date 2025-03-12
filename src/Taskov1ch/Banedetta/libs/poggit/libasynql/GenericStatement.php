@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql;
 
-use Taskov1ch\Banedetta\libs\poggit\libasynql\generic\GenericVariable;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\generic\GenericVariable;
 
 interface GenericStatement
 {

@@ -20,13 +20,13 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\generic;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\generic;
 
 use AssertionError;
 use InvalidArgumentException;
 use JsonSerializable;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\GenericStatement;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlDialect;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\GenericStatement;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlDialect;
 use function array_key_exists;
 use function get_class;
 use function gettype;

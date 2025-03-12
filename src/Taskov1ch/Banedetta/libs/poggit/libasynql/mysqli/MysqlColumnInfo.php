@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\mysqli;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\mysqli;
 
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlColumnInfo;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlColumnInfo;
 
 class MysqlColumnInfo extends SqlColumnInfo
 {

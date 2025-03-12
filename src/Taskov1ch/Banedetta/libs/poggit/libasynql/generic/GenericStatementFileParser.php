@@ -20,10 +20,10 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\generic;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\generic;
 
 use InvalidArgumentException;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\GenericStatement;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\GenericStatement;
 use function array_pop;
 use function assert;
 use function count;

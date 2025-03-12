@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\base;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\base;
 
 use Error;
 use Exception;
@@ -30,16 +30,16 @@ use Logger;
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\Terminal;
 use ReflectionClass;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\DataConnector;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\generic\GenericStatementFileParser;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\GenericStatement;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\libasynql;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\libs\SOFe\AwaitGenerator\Await;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlChangeResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlInsertResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlSelectResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlError;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlThread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\DataConnector;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\generic\GenericStatementFileParser;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\GenericStatement;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\libasynql;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\libs\SOFe\AwaitGenerator\Await;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlChangeResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlInsertResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlSelectResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlError;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlThread;
 use TypeError;
 use function array_fill;
 use function array_merge;

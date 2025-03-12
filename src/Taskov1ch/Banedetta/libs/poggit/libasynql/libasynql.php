@@ -20,17 +20,17 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql;
 
 use InvalidArgumentException;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Terminal;
 use pocketmine\utils\Utils;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\base\DataConnectorImpl;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\base\SqlThreadPool;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\mysqli\MysqlCredentials;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\mysqli\MysqliThread;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\sqlite3\Sqlite3Thread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\base\DataConnectorImpl;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\base\SqlThreadPool;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\mysqli\MysqlCredentials;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\mysqli\MysqliThread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\sqlite3\Sqlite3Thread;
 use function array_keys;
 use function count;
 use function extension_loaded;

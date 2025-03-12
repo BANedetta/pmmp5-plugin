@@ -20,12 +20,12 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\base;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\base;
 
 use pmmp\thread\ThreadSafe;
 use pmmp\thread\ThreadSafeArray;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlError;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlError;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlResult;
 use function is_string;
 use function serialize;
 use function unserialize;

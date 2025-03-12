@@ -1,18 +1,5 @@
 {
-    "name": "tynaev/banedetta",
-    "description": "soon",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Taskov1ch\\Banedetta\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Taskov1ch",
-            "email": "tynaev.acc@gmail.com"
-        }
-    ],
-    "require": {}
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.71"
+    }
 }

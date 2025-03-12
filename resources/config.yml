@@ -1,64 +1,34 @@
-posts:
-  waiting: |-
-    Игрок {banned} был заблокирован игроком {by}
-    Причина: {reason}.
-    Ожидается доказательства в течение 6 часов, в ином случае ваш аккаунт будет заблокирован.
+default_lang: "en_US"
 
-  confirmed: |-
-    Игрок {banned} был заблокирован игроком {by}
-    Причина: {reason}.
-    Подтверждено!
+admins:  # Administrators who cannot be banned (all in lowercase)
+  - taskov1ch
+  - tester
 
-  denied: |-
-    Игрок {banned} был заблокирован игроком {by}
-    Причина: {reason}.
-    Не подтверждено! {banned} был разблокирован, а {by} заблокирован.
-
-  abuse: |-
-    Вы были навсегда заблокированы за злоупотребление командой блокировки.
-
-messages:
-  for_banned:
-    waiting: |-
-      Вы были заблокированы игроком {by}.
-      Причина: {reason}.
-      На данный момент ваш бан временный, и ожидается подтверждения модераторов.
-
-    confirmed: |-
-      Вы были заблокированы игроком {by}.
-      Причина: {reason}.
-      Ваша блокировка была подверждена модераторами, увы.
-      Аккаунт заблокирован навсегда (
-
-  for_sender:
-    command:
-      help: "Использование: /bban <игрок> <причина>"
-      is_op: "Тот кого бы пытаесь забанить, оператор сервера!"
-      success: |-
-        Вы заблокировали игрока {banned} по причине: {reason}
-        Вам необходимо предоставить доказательства в сообществе ВК, в ином случае вам аккаунт будет заблокирован.
-    abuse: |-
-      Вы были навсегда заблокированы за злоупотребление командой блокировки.
-
-databases:
-  # Тип базы данных. Поддерживаются "sqlite" и "mysql".
+database:
+  # The database type. "sqlite" and "mysql" are supported.
   type: sqlite
 
-  # Изменяйте эти настройки только в случае выбора "sqlite".
+  # Edit these settings only if you choose "sqlite".
   sqlite:
-    # Имя файла базы данных в папке данных плагина.
-    # Вы также можете указать абсолютный путь.
-    file: database.db
+    # The file name of the database in the plugin data folder.
+    # You can also put an absolute path here.
+    file: data.sqlite
 
-  # Изменяйте эти настройки только в случае выбора "mysql".
+  # Edit these settings only if you choose "mysql".
   mysql:
-    host: "127.0.0.1:3306"
-
-    # Избегайте использования пользователя "root" по соображениям безопасности.
+    host: 127.0.0.1
+    # Avoid using the "root" user for security reasons.
     username: root
-    password: qwerty
-    schema: banedetta
+    password: ""
+    schema: your_schema
 
-  # Максимальное количество одновременных SQL-запросов
-  # Рекомендуется: 1 для sqlite, 2 для MySQL. Вы можете дополнительно увеличить это значение, если ваше соединение MySQL очень медленное.
+  # The maximum number of simultaneous SQL queries
+  # Recommended: 1 for sqlite, 2 for MySQL. You may want to further increase this value if your MySQL connection is very slow.
   worker-limit: 1
+
+# Enter a list of commands that will be executed on behalf of the console.
+# If anything, this is a reward for the players who actually banned the violator and presented evidence.
+rewards:
+  - kick {%player} LOL :)
+
+time_limit: 21600  # Time to provide evidence in seconds (if there is no evidence, then ban)

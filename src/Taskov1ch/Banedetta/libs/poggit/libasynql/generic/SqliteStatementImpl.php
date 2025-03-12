@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\generic;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\generic;
 
 use InvalidArgumentException;
 use RuntimeException;
@@ -54,7 +54,7 @@ class SqliteStatementImpl extends GenericStatementImpl
 				return $this->formatVariable($unlist, $value, $placeHolder, $outArgs);
 			}, $value)) . ")";
 		}
-		
+
 		if ($value === null) {
 			if (!$variable->isNullable()) {
 				throw new InvalidArgumentException("The variable :{$variable->getName()} is not nullable");

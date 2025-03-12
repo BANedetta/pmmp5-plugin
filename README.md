@@ -1,0 +1,1 @@
+PHAR plugin in releases.

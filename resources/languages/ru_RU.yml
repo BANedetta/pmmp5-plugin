@@ -1,0 +1,24 @@
+name: Русский (Russian)
+
+for_banned.screen: |
+  Вы были забанены игроком {%by}.
+  Причина: {%reason}.
+
+for_sender.ban_command.usage: "Использование: /bban <игрок> <причина>"
+for_sender.ban_command.is_admin: "Человек, которого вы пытаетесь забанить, является АДМИНИСТРАТОРОМ!"
+for_sender.ban_command.long_reason: "Причина бана слишком длинная."
+for_sender.ban_command.success.for_admin: "Вы забанили игрока {%banned} по причине: {%reason}"
+for_sender.ban_command.success: |
+  Вы забанили игрока {%banned} по причине: {%reason}.
+  Вы должны предоставить доказательства в сообществе ВКонтакте или в Telegram-канале, в противном случае ваш аккаунт будет забанен!
+  У вас есть 6 часов, чтобы предоставить доказательства.
+
+for_sender.unban_command.usage: "Использование: /bban <игрок> <причина>"
+for_sender.unban_command.not_banned: "Этот игрок не забанен."
+for_sender.unban_command.success: "Игрок успешно разбанен."
+
+for_sender.abuse_reason: |
+  Вы были забанены навсегда за злоупотребление командой бана.
+
+for_sender.awarded: |
+  Вы успешно забанили нарушителя и предоставили доказательства, вам выдана награда!

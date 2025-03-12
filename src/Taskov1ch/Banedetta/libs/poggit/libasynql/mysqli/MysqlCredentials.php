@@ -20,13 +20,13 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\mysqli;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\mysqli;
 
 use JsonSerializable;
 use mysqli;
 use mysqli_sql_exception;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\ConfigException;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlError;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\ConfigException;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlError;
 use function strlen;
 
 class MysqlCredentials implements JsonSerializable

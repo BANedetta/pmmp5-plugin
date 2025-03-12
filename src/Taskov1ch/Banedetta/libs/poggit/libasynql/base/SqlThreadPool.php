@@ -20,12 +20,12 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\base;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\base;
 
 use InvalidArgumentException;
 use pocketmine\Server;
 use pocketmine\snooze\SleeperHandlerEntry;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlThread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlThread;
 
 class SqlThreadPool implements SqlThread
 {

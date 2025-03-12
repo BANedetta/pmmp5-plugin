@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\base;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\base;
 
 use pmmp\thread\ThreadSafe;
 use pmmp\thread\ThreadSafeArray;

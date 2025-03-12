@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\sqlite3;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\sqlite3;
 
 use Closure;
 use ErrorException;
@@ -29,16 +29,16 @@ use InvalidArgumentException;
 use pocketmine\errorhandler\ErrorToExceptionHandler;
 use pocketmine\snooze\SleeperHandlerEntry;
 use SQLite3;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\base\QueryRecvQueue;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\base\QuerySendQueue;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\base\SqlSlaveThread;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlChangeResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlColumnInfo;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlInsertResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\result\SqlSelectResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlError;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlThread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\base\QueryRecvQueue;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\base\QuerySendQueue;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\base\SqlSlaveThread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlChangeResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlColumnInfo;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlInsertResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\result\SqlSelectResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlError;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlThread;
 use function assert;
 use function is_array;
 use const INF;

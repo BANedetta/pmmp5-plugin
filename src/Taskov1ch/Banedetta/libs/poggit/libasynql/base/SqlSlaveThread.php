@@ -20,17 +20,17 @@
 
 declare(strict_types=1);
 
-namespace Taskov1ch\Banedetta\libs\poggit\libasynql\base;
+namespace Taskov1ch\BANedetta\libs\poggit\libasynql\base;
 
 use InvalidArgumentException;
 use pmmp\thread\Thread as NativeThread;
 use pocketmine\Server;
 use pocketmine\snooze\SleeperHandlerEntry;
 use pocketmine\thread\Thread;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\libasynql;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlError;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlResult;
-use Taskov1ch\Banedetta\libs\poggit\libasynql\SqlThread;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\libasynql;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlError;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlResult;
+use Taskov1ch\BANedetta\libs\poggit\libasynql\SqlThread;
 
 abstract class SqlSlaveThread extends Thread implements SqlThread
 {
