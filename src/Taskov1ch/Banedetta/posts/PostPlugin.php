@@ -16,16 +16,17 @@ abstract class PostPlugin extends PluginBase
 {
 
 	/**
-	* Returns an array of database query file names.
-	*
-	* This method should return an array of strings, where each string
-	* represents the name of a SQL file containing database queries.
-	* These files will be loaded to initialize the necessary database
-	* tables and structures for the plugin.
-	*
-	* @return array<string> An array of database query file names.
-	*/
-	abstract public function getDatabaseQueries(): array;
+	 * Called when the plugin is registered in the PostsManager.
+	 *
+	 * This method is called after the plugin has been registered in the
+	 * PostsManager. It is a good place to perform any initialization
+	 * tasks that depend on the plugin being fully integrated into the
+	 * BANedetta system.
+	 */
+	public function onRegistered(): void
+	{}
+
+	abstract public function getDatabaseQueriesMap(): array;
 
 	/**
 	 * Creates a ban post.
@@ -40,23 +41,23 @@ abstract class PostPlugin extends PluginBase
 	/**
 	 * Removes a ban post associated with a specific player.
 	 *
-	 * @param string $banned The name of the player whose posts should be removed.
+	 * @param string $banned The name of the banned player.
 	 */
 	abstract public function removePost(string $banned): void;
 
 	/**
 	 * Confirms the ban post.
 	 *
-	 * @param PostPlugin $by The instance of the post plugin that confirms the ban.
+	 * @param string $banned The name of the banned player.
 	 */
-	abstract public function confirmed(string $id): void;
+	abstract public function confirmed(string $banned): void;
 
 	/**
 	 * Rejects the ban post.
 	 *
-	 * @param PostPlugin $by The instance of the post plugin that rejects the ban.
+	 * @param string $banned The name of the banned player.
 	 */
-	abstract public function notConfirmed(string $id): void;
+	abstract public function notConfirmed(string $banned): void;
 
 	/**
 	 * Gets the BansManager instance.

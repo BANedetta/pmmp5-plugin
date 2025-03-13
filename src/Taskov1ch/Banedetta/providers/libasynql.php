@@ -11,12 +11,15 @@ use Taskov1ch\BANedetta\libs\poggit\libasynql\libasynql as DataBase;
 class libasynql
 {
 	private DataConnector $db;
+	private string $type;
 
 	public function __construct(BANedetta $main)
 	{
+		$config = $main->getConfig()->get("database");
+		$this->type = $config["type"];
+
 		$this->db = DataBase::create(
-			$main,
-			$main->getConfig()->get("database"),
+			$main, $config,
 			[
 				"mysql" => "database/mysql.sql",
 				"sqlite" => "database/sqlite.sql"
@@ -25,6 +28,11 @@ class libasynql
 
 		$this->db->executeGeneric("table.init");
 		$this->db->waitAll();
+	}
+
+	public function getType(): string
+	{
+		return $this->type;
 	}
 
 	public function getData(string $id): Promise

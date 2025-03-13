@@ -35,10 +35,12 @@ class PostsManager
 		}
 
 		$db = $plugin->getBansManager()->getDataBase();
+		$map = $plugin->getDatabaseQueriesMap();
 
-		foreach ($plugin->getDatabaseQueries() as $file) {
-			$db->loadQueryFile($plugin->getResource($file));
-		}
+		$type = $plugin->getBansManager()->getType();
+		$db->loadQueryFile($plugin->getResource($map[$type]));
+
+		$plugin->onRegistered();
 
 		$this->plugins[] = $plugin;
 		return true;

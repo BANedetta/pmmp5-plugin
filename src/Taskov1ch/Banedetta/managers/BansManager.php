@@ -25,123 +25,13 @@ class BansManager
 	}
 
 	/**
-	 * Checks if a player is banned and kicks them if they are.
+	 * Gets the database connector.
 	 *
-	 * @param Player $player The player to check.
+	 * @return DataConnector The database connector instance.
 	 */
-	public function checkAndKick(Player $player): void
+	public function getDataBase(): DataConnector
 	{
-		$this->getData($player->getName())->onCompletion(
-			function (?array $data) use ($player) {
-				if ($data) {
-					$this->kick($player, $data["by"], $data["reason"]);
-				}
-			},
-			fn () => null
-		);
-	}
-
-	/**
-	 * Checks if a player is eligible for rewards and grants them if they meet the criteria.
-	 *
-	 * @param Player $player The player to check.
-	 */
-	public function checkAndGiveRewards(Player $player): void
-	{
-		$this->getData($player->getName())->onCompletion(
-			function (?array $data) use ($player) {
-				if ($data && $data["confirmed"] && !$data["trigger"]) {
-					$commands = array_map(
-						fn (string $command) => str_replace(
-							"{%player}",
-							$data["by"],
-							$command
-						),
-						$this->main->getConfig()->get("rewards")
-					);
-					$console = new ConsoleCommandSender(
-						$this->main->getServer(),
-						$this->main->getServer()->getLanguage()
-					);
-
-					foreach ($commands as $command) {
-						$this->main->getServer()->dispatchCommand(
-							$console,
-							$command
-						);
-					}
-
-					$message = $this->main->getTranslator()->translate($player, "for_sender.awarded");
-					$player->sendMessage($message);
-
-					$this->db->trigger($data["id"]);
-				}
-			},
-			fn () => null
-		);
-	}
-
-	/**
-	 * Bans a player.
-	 *
-	 * @param string $nickname The player's nickname.
-	 * @param string $by The name of the administrator who issued the ban.
-	 * @param string $reason The reason for the ban.
-	 * @param bool $isAdmin Whether the ban was issued by an administrator (default is true).
-	 */
-	public function ban(string $nickname, string $by, string $reason, bool $isAdmin = true): void
-	{
-		$id = strtolower($nickname);
-		$by = strtolower($by);
-
-		$player = $this->main->getServer()->getPlayerExact($id);
-
-		if ($player and $player->isOnline()) {
-			$this->kick($player, $by, $reason);
-		}
-
-		if (!$isAdmin) {
-			$this->main->getPostsManager()->createPost($id, $by, $reason);
-			$this->schedule($id);
-		}
-
-		$this->db->ban(
-			$id,
-			$by,
-			$reason,
-			$isAdmin ? fn () => $this->db->trigger($id) : null
-		);
-	}
-
-	/**
-	 * Unbans a player.
-	 *
-	 * @param string $nickname The player's nickname.
-	 * @param bool $removePost Whether to remove the ban-related post (default is true).
-	 */
-	public function unban(string $nickname, bool $removePost = true): void
-	{
-		$id = strtolower($nickname);
-
-		if ($removePost) {
-			$this->main->getPostsManager()->removePost($id);
-		}
-
-		$this->removeSchedule($id);
-		$this->db->unban($id);
-	}
-
-	/**
-	 * Retrieves ban data for a player.
-	 *
-	 * @param string $nickname The player's nickname.
-	 * @return Promise A promise resolving with the ban data (array) or null if the player is not banned.
-	 */
-	public function getData(string $nickname): Promise
-	{
-		$id = strtolower($nickname);
-
-		return $this->db->getData($id);
+		return $this->db->getDataBase();
 	}
 
 	/**
@@ -168,7 +58,7 @@ class BansManager
 
 				$this->main->getPostsManager()->confirm($data["id"]);
 			},
-			fn () => null
+			fn() => null
 		);
 	}
 
@@ -194,16 +84,105 @@ class BansManager
 
 				$this->main->getPostsManager()->notConfirmed($data["id"]);
 			},
-			fn () => null
+			fn() => null
 		);
 	}
 
-	/**
-	 * Schedules automatic cancellation of ban confirmation after a set period.
-	 *
-	 * @param string $nickname The banned player's nickname.
-	 * @param int $timeLimit Time in seconds before cancellation (default is 0, meaning it will use the configured time limit).
-	 */
+	public function getType(): string
+	{
+		return $this->db->getType();
+	}
+
+	public function checkAndKick(Player $player): void
+	{
+		$this->getData($player->getName())->onCompletion(
+			function (?array $data) use ($player) {
+				if ($data) {
+					$this->kick($player, $data["by"], $data["reason"]);
+				}
+			},
+			fn() => null
+		);
+	}
+
+	public function checkAndGiveRewards(Player $player): void
+	{
+		$this->getData($player->getName())->onCompletion(
+			function (?array $data) use ($player) {
+				if ($data && $data["confirmed"] && !$data["trigger"]) {
+					$commands = array_map(
+						fn(string $command) => str_replace(
+							"{%player}",
+							$data["by"],
+							$command
+						),
+						$this->main->getConfig()->get("rewards")
+					);
+					$console = new ConsoleCommandSender(
+						$this->main->getServer(),
+						$this->main->getServer()->getLanguage()
+					);
+
+					foreach ($commands as $command) {
+						$this->main->getServer()->dispatchCommand(
+							$console,
+							$command
+						);
+					}
+
+					$message = $this->main->getTranslator()->translate($player, "for_sender.awarded");
+					$player->sendMessage($message);
+
+					$this->db->trigger($data["id"]);
+				}
+			},
+			fn() => null
+		);
+	}
+
+	public function ban(string $nickname, string $by, string $reason, bool $isAdmin = true): void
+	{
+		$id = strtolower($nickname);
+		$by = strtolower($by);
+
+		$player = $this->main->getServer()->getPlayerExact($id);
+
+		if ($player and $player->isOnline()) {
+			$this->kick($player, $by, $reason);
+		}
+
+		if (!$isAdmin) {
+			$this->main->getPostsManager()->createPost($id, $by, $reason);
+			$this->schedule($id);
+		}
+
+		$this->db->ban(
+			$id,
+			$by,
+			$reason,
+			$isAdmin ? fn() => $this->db->trigger($id) : null
+		);
+	}
+
+	public function unban(string $nickname, bool $removePost = true): void
+	{
+		$id = strtolower($nickname);
+
+		if ($removePost) {
+			$this->main->getPostsManager()->removePost($id);
+		}
+
+		$this->removeSchedule($id);
+		$this->db->unban($id);
+	}
+
+	public function getData(string $nickname): Promise
+	{
+		$id = strtolower($nickname);
+
+		return $this->db->getData($id);
+	}
+
 	public function schedule(string $nickname, int $timeLimit = 0): void
 	{
 		$id = strtolower($nickname);
@@ -212,16 +191,11 @@ class BansManager
 
 		if ($timeLimit > 0 and !isset($this->schedules[$id])) {
 			$this->schedules[$id] = $this->main->getScheduler()->scheduleDelayedTask(new ClosureTask(
-				fn () => $this->notConfirm($id)
+				fn() => $this->notConfirm($id)
 			), 20 * $timeLimit);
 		}
 	}
 
-	/**
-	 * Removes a scheduled task for ban confirmation cancellation.
-	 *
-	 * @param string $nickname The banned player's nickname.
-	 */
 	public function removeSchedule(string $nickname): void
 	{
 		$id = strtolower($nickname);
@@ -235,24 +209,9 @@ class BansManager
 		}
 	}
 
-	/**
-	 * Retrieves all pending ban data.
-	 *
-	 * @return Promise A promise resolving with all pending ban data.
-	 */
 	public function getAllPendingDatas(): Promise
 	{
 		return $this->db->getAllPendingDatas();
-	}
-
-	/**
-	 * Gets the database connector.
-	 *
-	 * @return DataConnector The database connector instance.
-	 */
-	public function getDataBase(): DataConnector
-	{
-		return $this->db->getDataBase();
 	}
 
 	private function kick(Player $player, string $by, string $reason): void
