@@ -2,11 +2,14 @@ name: BANedetta
 version: 3.0.0
 api: 5.0.0
 main: Taskov1ch\BANedetta\BANedetta
+load: POSTWORLD
+
 description: It's time to ban violators in front of everyone!
 author: Taskov1ch
 
 permissions:
   banedetta.ban:
     default: op
+
   banedetta.unban:
     default: op

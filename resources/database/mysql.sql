@@ -37,6 +37,11 @@
 			created_at = VALUES(created_at);
 	-- #}
 
+	-- #{ unban
+		-- # :id string
+		DELETE FROM data WHERE id = :id;
+	-- #}
+
 	-- #{ confirm
 		-- # :id string
 		UPDATE data SET confirmed = 1 WHERE id = :id;

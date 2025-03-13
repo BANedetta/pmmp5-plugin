@@ -37,6 +37,11 @@
 			created_at = CURRENT_TIMESTAMP;
 	-- #}
 
+	-- #{ unban
+		-- # :id string
+		DELETE FROM data WHERE id = :id;
+	-- #}
+
 	-- #{ confirm
 		-- # :id string
 		UPDATE data SET confirmed = TRUE WHERE id = :id;

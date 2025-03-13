@@ -34,6 +34,12 @@ class PostsManager
 			return false;
 		}
 
+		$db = $plugin->getBansManager()->getDataBase();
+
+		foreach ($plugin->getDatabaseQueries() as $file) {
+			$db->loadQueryFile($plugin->getResource($file));
+		}
+
 		$this->plugins[] = $plugin;
 		return true;
 	}

@@ -19,9 +19,6 @@ class BansManager
 	 */
 	private array $schedules = [];
 
-	/**
-	 * @param BANedetta $main Instance of the main plugin class.
-	 */
 	public function __construct(private BANedetta $main)
 	{
 		$this->db = new libasynql($main);
@@ -45,7 +42,7 @@ class BansManager
 	}
 
 	/**
-	 * Checks if the player can receive rewards and grants them if they are eligible.
+	 * Checks if a player is eligible for rewards and grants them if they meet the criteria.
 	 *
 	 * @param Player $player The player to check.
 	 */
@@ -90,7 +87,7 @@ class BansManager
 	 * @param string $nickname The player's nickname.
 	 * @param string $by The name of the administrator who issued the ban.
 	 * @param string $reason The reason for the ban.
-	 * @param bool $isAdmin Flag indicating whether the ban was issued by an admin (default is true).
+	 * @param bool $isAdmin Whether the ban was issued by an administrator (default is true).
 	 */
 	public function ban(string $nickname, string $by, string $reason, bool $isAdmin = true): void
 	{
@@ -105,7 +102,6 @@ class BansManager
 
 		if (!$isAdmin) {
 			$this->main->getPostsManager()->createPost($id, $by, $reason);
-		} else {
 			$this->schedule($id);
 		}
 
@@ -121,7 +117,7 @@ class BansManager
 	 * Unbans a player.
 	 *
 	 * @param string $nickname The player's nickname.
-	 * @param bool $removePost Flag indicating whether to remove the post about the ban (default is true).
+	 * @param bool $removePost Whether to remove the ban-related post (default is true).
 	 */
 	public function unban(string $nickname, bool $removePost = true): void
 	{
@@ -136,10 +132,10 @@ class BansManager
 	}
 
 	/**
-	 * Gets the ban data for a player.
+	 * Retrieves ban data for a player.
 	 *
 	 * @param string $nickname The player's nickname.
-	 * @return Promise A promise that resolves with the ban data (array) or null if the player is not banned.
+	 * @return Promise A promise resolving with the ban data (array) or null if the player is not banned.
 	 */
 	public function getData(string $nickname): Promise
 	{
@@ -151,11 +147,11 @@ class BansManager
 	/**
 	 * Confirms a ban.
 	 *
-	 * @param string $id The ID of the ban.
+	 * @param string $nickname The player's nickname.
 	 */
-	public function confirm(string $id): void
+	public function confirm(string $nickname): void
 	{
-		$this->db->getData($id)->onCompletion(
+		$this->db->getData($nickname)->onCompletion(
 			function (?array $data) {
 				if (!$data || $data["confirmed"]) {
 					return;
@@ -178,13 +174,13 @@ class BansManager
 
 	/**
 	 * Cancels the ban confirmation and unbans the player.
-	 * If the ban was wrong, it bans the administrator for abuse.
+	 * If the ban was unjustified, the administrator who issued it will be banned for abuse.
 	 *
-	 * @param string $id The ID of the ban.
+	 * @param string $nickname The banned player's nickname.
 	 */
-	public function notConfirm(string $id): void
+	public function notConfirm(string $nickname): void
 	{
-		$this->db->getData($id)->onCompletion(
+		$this->db->getData($nickname)->onCompletion(
 			function (?array $data) {
 				if (!$data || $data["confirmed"] || $data["trigger"]) {
 					return;
@@ -203,14 +199,14 @@ class BansManager
 	}
 
 	/**
-	 * Schedules the cancellation of the ban confirmation after a specified time.
+	 * Schedules automatic cancellation of ban confirmation after a set period.
 	 *
-	 * @param string $id The ID of the ban.
-	 * @param int $timeLimit The time in seconds before the confirmation cancellation (defaults to 0, which means using the time limit from the config).
+	 * @param string $nickname The banned player's nickname.
+	 * @param int $timeLimit Time in seconds before cancellation (default is 0, meaning it will use the configured time limit).
 	 */
-	public function schedule(string $id, int $timeLimit = 0): void
+	public function schedule(string $nickname, int $timeLimit = 0): void
 	{
-		$id = strtolower($id);
+		$id = strtolower($nickname);
 		$timeLimit = $timeLimit > 0 ?
 			$timeLimit : $this->main->getConfig()->get("time_limit");
 
@@ -222,13 +218,13 @@ class BansManager
 	}
 
 	/**
-	 * Removes the scheduled task for canceling the ban confirmation.
+	 * Removes a scheduled task for ban confirmation cancellation.
 	 *
-	 * @param string $id The ID of the ban.
+	 * @param string $nickname The banned player's nickname.
 	 */
-	public function removeSchedule(string $id): void
+	public function removeSchedule(string $nickname): void
 	{
-		$id = strtolower($id);
+		$id = strtolower($nickname);
 
 		if (isset($this->schedules[$id])) {
 			if (!$this->schedules[$id]->isCancelled()) {
@@ -240,9 +236,9 @@ class BansManager
 	}
 
 	/**
-	 * Gets all pending ban data.
+	 * Retrieves all pending ban data.
 	 *
-	 * @return Promise A promise that resolves with all pending ban data.
+	 * @return Promise A promise resolving with all pending ban data.
 	 */
 	public function getAllPendingDatas(): Promise
 	{
@@ -252,20 +248,13 @@ class BansManager
 	/**
 	 * Gets the database connector.
 	 *
-	 * @return DataConnector The database connector.
+	 * @return DataConnector The database connector instance.
 	 */
 	public function getDataBase(): DataConnector
 	{
 		return $this->db->getDataBase();
 	}
 
-	/**
-	 * Kicks a player with a ban message.
-	 *
-	 * @param Player $player The player to kick.
-	 * @param string $by The name of the administrator who issued the ban.
-	 * @param string $reason The reason for the ban.
-	 */
 	private function kick(Player $player, string $by, string $reason): void
 	{
 		$screen = $this->main->getTranslator()->translate(

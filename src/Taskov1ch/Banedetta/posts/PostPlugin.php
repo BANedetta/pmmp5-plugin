@@ -14,6 +14,19 @@ use Taskov1ch\BANedetta\managers\BansManager;
  */
 abstract class PostPlugin extends PluginBase
 {
+
+	/**
+	* Returns an array of database query file names.
+	*
+	* This method should return an array of strings, where each string
+	* represents the name of a SQL file containing database queries.
+	* These files will be loaded to initialize the necessary database
+	* tables and structures for the plugin.
+	*
+	* @return array<string> An array of database query file names.
+	*/
+	abstract public function getDatabaseQueries(): array;
+
 	/**
 	 * Creates a ban post.
 	 *
@@ -21,16 +34,15 @@ abstract class PostPlugin extends PluginBase
 	 * @param string $by The name of the player who banned the target.
 	 * @param string $reason The reason for the ban.
 	 * @param int $timeLimit The number of seconds given to present evidence.
-	 * @return void
 	 */
 	abstract public function createPost(string $banned, string $by, string $reason, int $timeLimit): void;
 
 	/**
-	 * Removes all ban posts associated with a specific player.
+	 * Removes a ban post associated with a specific player.
 	 *
 	 * @param string $banned The name of the player whose posts should be removed.
 	 */
-	abstract public function removePosts(string $banned): void;
+	abstract public function removePost(string $banned): void;
 
 	/**
 	 * Confirms the ban post.
