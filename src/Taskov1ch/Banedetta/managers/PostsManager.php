@@ -58,7 +58,7 @@ class PostsManager
 	public function removePost(string $banned): void
 	{
 		foreach ($this->plugins as $plugin) {
-			$plugin->removePosts($banned);
+			$plugin->removePost($banned);
 		}
 	}
 

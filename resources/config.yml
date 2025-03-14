@@ -1,4 +1,4 @@
-default_lang: "en_US"
+default_language: en_US
 
 admins:  # Administrators who cannot be banned (all in lowercase)
   - taskov1ch

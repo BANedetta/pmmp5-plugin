@@ -77,7 +77,7 @@ class BansManager
 				}
 
 				$this->removeSchedule($data["id"]);
-				$this->unban($data["id"]);
+				$this->unban($data["id"], false);
 
 				$reason = $this->main->getTranslator()->translate(null, "for_sender.abuse_reason");
 				$this->ban($data["by"], "console", $reason, true);
@@ -88,11 +88,17 @@ class BansManager
 		);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function getType(): string
 	{
 		return $this->db->getType();
 	}
 
+	/**
+	 * @internal
+	 */
 	public function checkAndKick(Player $player): void
 	{
 		$this->getData($player->getName())->onCompletion(
@@ -105,6 +111,9 @@ class BansManager
 		);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function checkAndGiveRewards(Player $player): void
 	{
 		$this->getData($player->getName())->onCompletion(
@@ -140,6 +149,9 @@ class BansManager
 		);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function ban(string $nickname, string $by, string $reason, bool $isAdmin = true): void
 	{
 		$id = strtolower($nickname);
@@ -164,6 +176,9 @@ class BansManager
 		);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function unban(string $nickname, bool $removePost = true): void
 	{
 		$id = strtolower($nickname);
@@ -176,6 +191,9 @@ class BansManager
 		$this->db->unban($id);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function getData(string $nickname): Promise
 	{
 		$id = strtolower($nickname);
@@ -183,6 +201,9 @@ class BansManager
 		return $this->db->getData($id);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function schedule(string $nickname, int $timeLimit = 0): void
 	{
 		$id = strtolower($nickname);
@@ -196,19 +217,22 @@ class BansManager
 		}
 	}
 
+	/**
+	 * @internal
+	 */
 	public function removeSchedule(string $nickname): void
 	{
 		$id = strtolower($nickname);
 
 		if (isset($this->schedules[$id])) {
-			if (!$this->schedules[$id]->isCancelled()) {
-				$this->schedules[$id]->remove();
-			}
-
+			$this->schedules[$id]->remove();
 			unset($this->schedules[$id]);
 		}
 	}
 
+	/**
+	 * @internal
+	 */
 	public function getAllPendingDatas(): Promise
 	{
 		return $this->db->getAllPendingDatas();

@@ -7,7 +7,6 @@ use Taskov1ch\BANedetta\BANedetta;
 
 class UnbanCommand extends BANedettaCommand
 {
-	private BANedetta $main;
 
 	public function do(CommandSender $sender, array $args): void
 	{

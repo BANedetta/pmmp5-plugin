@@ -26,6 +26,16 @@ abstract class PostPlugin extends PluginBase
 	public function onRegistered(): void
 	{}
 
+	/**
+	 * Returns a map of database query files for different database types.
+	 *
+	 * This method should return an associative array where the keys are database
+	 * types (e.g., "mysql", "sqlite") and the values are the paths to the
+	 * corresponding SQL files containing the database schema and queries.
+	 *
+	 * @return array<string, string> An associative array mapping database types to SQL file paths.
+	 * Example: ["mysql" => "database/mysql.sql", "sqlite" => "database/sqlite.sql"]
+	 */
 	abstract public function getDatabaseQueriesMap(): array;
 
 	/**

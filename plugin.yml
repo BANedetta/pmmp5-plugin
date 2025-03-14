@@ -1,8 +1,7 @@
 name: BANedetta
-version: 3.0.0
+version: 3.0.0-beta
 api: 5.0.0
 main: Taskov1ch\BANedetta\BANedetta
-load: STARTUP
 
 description: It's time to ban violators in front of everyone!
 author: Taskov1ch

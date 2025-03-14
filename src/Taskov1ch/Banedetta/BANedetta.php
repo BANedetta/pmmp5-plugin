@@ -107,6 +107,8 @@ class BANedetta extends PluginBase
 
 			$this->translator->registerLanguage($lang);
 
+			var_dump($langName, $defaultLang);
+
 			if ($langName === $defaultLang) {
 				$this->translator->setDefaultLanguage($lang);
 			}
@@ -121,7 +123,7 @@ class BANedetta extends PluginBase
 					$date = new DateTime($data["created_at"]);
 					$now = new DateTime();
 
-					if ($date > $now) {
+					if ($date < $now) {
 						$this->bansManager->notConfirm($data["id"]);
 					} else {
 						$interval = $now->diff($date);

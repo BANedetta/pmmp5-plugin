@@ -7,7 +7,6 @@ use Taskov1ch\BANedetta\BANedetta;
 
 class BanCommand extends BANedettaCommand
 {
-	private BANedetta $main;
 
 	public function do(CommandSender $sender, array $args): void
 	{
@@ -23,8 +22,9 @@ class BanCommand extends BANedettaCommand
 		$by = strtolower($sender->getName());
 
 		$isAdmin = $this->isAdmin($sender);
+		$targetIsAdmin = $this->isAdmin($target);
 
-		if ($isAdmin) {
+		if ($targetIsAdmin) {
 			$message = $translator->translate($sender, "for_sender.ban_command.is_admin");
 			$sender->sendMessage($message);
 			return;
@@ -42,7 +42,8 @@ class BanCommand extends BANedettaCommand
 
 		$message = $translator->translate(
 			$sender,
-			"for_sender.ban_command.success" . $isAdmin ? ".for_admin" : ""
+			"for_sender.ban_command.success" . ($isAdmin ? ".for_admin" : ""),
+			["{%banned}" => $target, "{%reason}" => $reason]
 		);
 		$sender->sendMessage($message);
 	}

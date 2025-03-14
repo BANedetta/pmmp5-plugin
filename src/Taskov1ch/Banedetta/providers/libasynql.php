@@ -71,7 +71,7 @@ class libasynql
 	public function trigger(string $id, ?callable $onCompletion = null): void
 	{
 		$id = strtolower($id);
-		$this->db->executeInsert("data.rewards_given", compact("id"), $onCompletion);
+		$this->db->executeInsert("data.trigger", compact("id"), $onCompletion);
 	}
 
 	public function getAllPendingDatas(): Promise
