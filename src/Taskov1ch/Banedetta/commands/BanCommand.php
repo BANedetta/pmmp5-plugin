@@ -3,7 +3,6 @@
 namespace Taskov1ch\BANedetta\commands;
 
 use pocketmine\command\CommandSender;
-use Taskov1ch\BANedetta\BANedetta;
 
 class BanCommand extends BANedettaCommand
 {

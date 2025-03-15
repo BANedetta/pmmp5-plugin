@@ -107,8 +107,6 @@ class BANedetta extends PluginBase
 
 			$this->translator->registerLanguage($lang);
 
-			var_dump($langName, $defaultLang);
-
 			if ($langName === $defaultLang) {
 				$this->translator->setDefaultLanguage($lang);
 			}
@@ -125,17 +123,19 @@ class BANedetta extends PluginBase
 
 					if ($date < $now) {
 						$this->bansManager->notConfirm($data["id"]);
-					} else {
-						$interval = $now->diff($date);
-						$seconds = $interval->days * 86400 +
-							$interval->h * 3600 +
-							$interval->i * 60 +
-							$interval->s;
-						$this->bansManager->schedule($data["id"], $seconds);
+						continue;
 					}
+
+					$interval = $now->diff($date);
+					$seconds = $interval->days * 86400 +
+						$interval->h * 3600 +
+						$interval->i * 60 +
+						$interval->s;
+
+					$this->bansManager->schedule($data["id"], $seconds);
 				}
 			},
-			fn () => null
+			fn() => null
 		);
 	}
 }
