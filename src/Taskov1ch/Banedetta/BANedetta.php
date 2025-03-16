@@ -14,6 +14,8 @@ use Taskov1ch\BANedetta\commands\UnbanCommand;
 use Taskov1ch\BANedetta\managers\BansManager;
 use Taskov1ch\BANedetta\managers\PostsManager;
 
+// require_once __DIR__ . "/libasynql.phar";
+
 class BANedetta extends PluginBase
 {
 	use SingletonTrait;
