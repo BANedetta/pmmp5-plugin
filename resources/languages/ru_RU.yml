@@ -13,7 +13,7 @@ for_sender.ban_command.success: |
   Вы должны предоставить доказательства в сообществе ВКонтакте или в Telegram-канале, в противном случае ваш аккаунт будет забанен!
   У вас есть 6 часов, чтобы предоставить доказательства.
 
-for_sender.unban_command.usage: "Использование: /bban <игрок> <причина>"
+for_sender.unban_command.usage: "Использование: /unban <игрок>"
 for_sender.unban_command.not_banned: "Этот игрок не забанен."
 for_sender.unban_command.success: "Игрок успешно разбанен."
 

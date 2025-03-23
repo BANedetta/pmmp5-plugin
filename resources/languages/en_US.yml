@@ -13,7 +13,7 @@ for_sender.ban_command.success: |
   You must provide evidence in the VKontakte community or Telegram channel, otherwise, your account will be banned!
   You have 6 hours to provide evidence.
 
-for_sender.unban_command.usage: "Usage: /bban <player> <reason>"
+for_sender.unban_command.usage: "Usage: /unban <player>"
 for_sender.unban_command.not_banned: "This player is not banned."
 for_sender.unban_command.success: "The player has been successfully unbanned."
 
