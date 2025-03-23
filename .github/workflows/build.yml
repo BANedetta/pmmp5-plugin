@@ -1,0 +1,73 @@
+name: Build and Release PHAR plugin
+
+on: []
+  # push:
+  #   branches:
+  #     - stable
+
+jobs:
+  build-plugin:
+    uses: BANedetta/plugin-builder/.github/workflows/build.yml@main
+    with:
+      use_composer: false
+      use_virions: true
+
+  release:
+    needs: build-plugin
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name:
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin.phar
+          path: .
+
+      - name: Extract Version from plugin.yml
+        id: get_version
+        run: |
+          VERSION=$(grep '^version:' plugin.yml | sed -E 's/version: "?([^"]+)"?/\1/')
+          echo "PLUGIN_VERSION=v$VERSION" >> $GITHUB_ENV
+          echo "Extracted version: v$VERSION"
+
+      - name: Check if Release Exists
+        id: check_release
+        run: |
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ env.PLUGIN_VERSION }}")
+          echo "RELEASE_STATUS=$RESPONSE" >> $GITHUB_ENV
+
+      - name: Get Build Number if Release Exists
+        if: env.RELEASE_STATUS == '200'
+        run: |
+          RELEASE_INFO=$(curl -s \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ env.PLUGIN_VERSION }}")
+          BUILD_NUMBER=$(echo "$RELEASE_INFO" | jq -r '.name' | grep -oE '[0-9]+$')
+          BUILD_NUMBER=${BUILD_NUMBER:-0}
+          NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
+          echo "BUILD_NUMBER=$NEW_BUILD_NUMBER" >> $GITHUB_ENV
+
+      - name: Set Initial Build Number if No Release Exists
+        if: env.RELEASE_STATUS != '200'
+        run: echo "BUILD_NUMBER=1" >> $GITHUB_ENV
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: '${{ env.PLUGIN_VERSION }}'
+          name: '${{ env.PLUGIN_VERSION }} | build ${{ env.BUILD_NUMBER }}'
+          draft: false
+          prerelease: false
+          files: plugin.phar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

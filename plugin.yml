@@ -1,0 +1,15 @@
+name: BANedetta
+version: 3.0.0-dev
+api: 5.0.0
+main: Taskov1ch\BANedetta\BANedetta
+
+description: It's time to ban violators in front of everyone!
+author: Taskov1ch
+website: https://github.com/BANedetta/pmmp5-plugin
+
+permissions:
+  banedetta.ban:
+    default: op
+
+  banedetta.unban:
+    default: op

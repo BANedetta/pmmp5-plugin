@@ -25,11 +25,10 @@ abstract class BANedettaCommand extends Command
 
 	protected function isAdmin(CommandSender|string $target): bool
 	{
-		// return $target instanceof CommandSender ?
-		// 		$target instanceof ConsoleCommandSender ||
-		// 		in_array(strtolower($target->getName()), $this->admins)
-		// 		: in_array(strtolower($target), $this->admins);
-		return false; // todo
+		return $target instanceof CommandSender ?
+				$target instanceof ConsoleCommandSender ||
+				in_array(strtolower($target->getName()), $this->admins)
+				: in_array(strtolower($target), $this->admins);
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args): void

@@ -5,8 +5,6 @@ namespace Taskov1ch\BANedetta\providers;
 use pocketmine\promise\Promise;
 use pocketmine\promise\PromiseResolver;
 use Taskov1ch\BANedetta\BANedetta;
-// use Taskov1ch\BANedetta\libs\poggit\libasynql\DataConnector;
-// use Taskov1ch\BANedetta\libs\poggit\libasynql\libasynql as DataBase;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql as DataBase;
 
