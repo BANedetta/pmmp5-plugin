@@ -1,9 +1,10 @@
 name: Build and Release PHAR plugin
 
-on: []
-  # push:
-  #   branches:
-  #     - stable
+on:
+  push:
+    branches:
+      - stable
+      - dev
 
 jobs:
   build-plugin:
@@ -13,6 +14,7 @@ jobs:
       use_virions: true
 
   release:
+    if: false
     needs: build-plugin
     runs-on: ubuntu-latest
 

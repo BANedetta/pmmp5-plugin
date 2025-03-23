@@ -5,7 +5,7 @@ main: Taskov1ch\BANedetta\BANedetta
 
 description: It's time to ban violators in front of everyone!
 author: Taskov1ch
-website: https://github.com/BANedetta/pmmp5-plugin
+website: https://github.com/BANedetta
 
 permissions:
   banedetta.ban:
