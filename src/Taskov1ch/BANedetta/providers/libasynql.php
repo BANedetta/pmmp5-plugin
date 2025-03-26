@@ -4,9 +4,9 @@ namespace Taskov1ch\BANedetta\providers;
 
 use pocketmine\promise\Promise;
 use pocketmine\promise\PromiseResolver;
-use Taskov1ch\BANedetta\BANedetta;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql as DataBase;
+use Taskov1ch\BANedetta\BANedetta;
 
 class libasynql
 {
@@ -19,7 +19,8 @@ class libasynql
 		$this->type = $config["type"];
 
 		$this->db = DataBase::create(
-			$main, $config,
+			$main,
+			$config,
 			[
 				"mysql" => "database/mysql.sql",
 				"sqlite" => "database/sqlite.sql"

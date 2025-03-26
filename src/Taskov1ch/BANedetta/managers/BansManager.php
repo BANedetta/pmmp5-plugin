@@ -6,8 +6,8 @@ use pocketmine\console\ConsoleCommandSender;
 use pocketmine\player\Player;
 use pocketmine\promise\Promise;
 use pocketmine\scheduler\ClosureTask;
-use Taskov1ch\BANedetta\BANedetta;
 use poggit\libasynql\DataConnector;
+use Taskov1ch\BANedetta\BANedetta;
 use Taskov1ch\BANedetta\providers\libasynql;
 
 class BansManager
@@ -58,7 +58,7 @@ class BansManager
 
 				$this->main->getPostsManager()->confirm($data["id"]);
 			},
-			fn() => null
+			fn () => null
 		);
 	}
 
@@ -84,7 +84,7 @@ class BansManager
 
 				$this->main->getPostsManager()->notConfirmed($data["id"]);
 			},
-			fn() => null
+			fn () => null
 		);
 	}
 
@@ -107,7 +107,7 @@ class BansManager
 					$this->kick($player, $data["by"], $data["reason"]);
 				}
 			},
-			fn() => null
+			fn () => null
 		);
 	}
 
@@ -120,7 +120,7 @@ class BansManager
 			function (?array $data) use ($player) {
 				if ($data && $data["confirmed"] && !$data["trigger"]) {
 					$commands = array_map(
-						fn(string $command) => str_replace(
+						fn (string $command) => str_replace(
 							"{%player}",
 							$data["by"],
 							$command
@@ -145,7 +145,7 @@ class BansManager
 					$this->db->trigger($data["id"]);
 				}
 			},
-			fn() => null
+			fn () => null
 		);
 	}
 
@@ -172,7 +172,7 @@ class BansManager
 			$id,
 			$by,
 			$reason,
-			$isAdmin ? fn() => $this->db->trigger($id) : null
+			$isAdmin ? fn () => $this->db->trigger($id) : null
 		);
 	}
 
@@ -208,13 +208,12 @@ class BansManager
 	{
 		$id = strtolower($nickname);
 
-		var_dump("schedule", $id);
 		$timeLimit = $timeLimit > 0 ?
 			$timeLimit : $this->main->getConfig()->get("time_limit");
 
 		if ($timeLimit > 0 and !isset($this->schedules[$id])) {
 			$this->schedules[$id] = $this->main->getScheduler()->scheduleDelayedTask(new ClosureTask(
-				fn() => $this->notConfirm($id)
+				fn () => $this->notConfirm($id)
 			), 20 * $timeLimit);
 		}
 	}
@@ -225,8 +224,6 @@ class BansManager
 	public function removeSchedule(string $nickname): void
 	{
 		$id = strtolower($nickname);
-
-		var_dump("remove", $id);
 
 		if (isset($this->schedules[$id])) {
 			$this->schedules[$id]->remove();

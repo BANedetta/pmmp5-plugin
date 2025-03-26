@@ -39,31 +39,16 @@ class BANedetta extends PluginBase
 		$this->initSchedules();
 	}
 
-	/**
-	 * Returns the BansManager instance.
-	 *
-	 * @return BansManager The BansManager instance.
-	 */
 	public function getBansManager(): BansManager
 	{
 		return $this->bansManager;
 	}
 
-	/**
-	 * Returns the PostsManager instance.
-	 *
-	 * @return PostsManager The PostsManager instance.
-	 */
 	public function getPostsManager(): PostsManager
 	{
 		return $this->postsManager;
 	}
 
-	/**
-	 * Returns the Translator instance.
-	 *
-	 * @return Translator The Translator instance.
-	 */
 	public function getTranslator(): Translator
 	{
 		return $this->translator;
@@ -135,7 +120,7 @@ class BANedetta extends PluginBase
 					$this->bansManager->schedule($data["id"], $seconds);
 				}
 			},
-			fn() => null
+			fn () => null
 		);
 	}
 }

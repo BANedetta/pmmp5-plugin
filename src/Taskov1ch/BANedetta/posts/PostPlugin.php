@@ -24,7 +24,8 @@ abstract class PostPlugin extends PluginBase
 	 * BANedetta system.
 	 */
 	public function onRegistered(): void
-	{}
+	{
+	}
 
 	/**
 	 * Returns a map of database query files for different database types.
