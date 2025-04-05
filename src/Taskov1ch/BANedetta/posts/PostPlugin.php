@@ -51,6 +51,8 @@ abstract class PostPlugin extends PluginBase
 
 	/**
 	 * Removes a ban post associated with a specific player.
+	 * This method will also be called again if there is a
+	 * post and the banned one has already been re-banned.
 	 *
 	 * @param string $banned The name of the banned player.
 	 */

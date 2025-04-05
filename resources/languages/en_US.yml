@@ -8,6 +8,7 @@ for_sender.ban_command.usage: "Usage: /bban <player> <reason>"
 for_sender.ban_command.is_admin: "The person you are trying to ban is an ADMINISTRATOR!"
 for_sender.ban_command.long_reason: "The reason for the ban is too long."
 for_sender.ban_command.success.for_admin: "You have banned player {%banned} for the reason: {%reason}"
+for_sender.ban_command.anti_selfban: "You cannot ban yourself!"
 for_sender.ban_command.success: |
   You have banned player {%banned} for the reason: {%reason}.
   You must provide evidence in the VKontakte community or Telegram channel, otherwise, your account will be banned!

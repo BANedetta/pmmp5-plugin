@@ -174,6 +174,7 @@ class BansManager
 			$reason,
 			$isAdmin ? fn () => $this->db->trigger($id) : null
 		);
+		$this->main->getPostsManager()->removePost($id);
 	}
 
 	/**

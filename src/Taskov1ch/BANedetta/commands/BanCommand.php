@@ -29,6 +29,12 @@ class BanCommand extends BANedettaCommand
 			return;
 		}
 
+		if ($by === $target) {
+			$message = $translator->translate($sender, "for_sender.ban_command.anti_selfban");
+			$sender->sendMessage($message);
+			return;
+		}
+
 		$reason = implode(" ", $args);
 
 		if (strlen($reason) > 200) {
