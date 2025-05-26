@@ -14,7 +14,6 @@ jobs:
       use_virions: true
 
   release:
-    if: false
     needs: build-plugin
     runs-on: ubuntu-latest
 
