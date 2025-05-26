@@ -3,8 +3,7 @@ name: Build and Release PHAR plugin
 on:
   push:
     branches:
-      - stable
-      - dev
+      - v3 
 
 jobs:
   build-plugin:
