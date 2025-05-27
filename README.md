@@ -27,7 +27,7 @@ namespace Example\Plugin;
 use Taskov1ch/BANedetta/BANedetta;
 use Taskov1ch/BANedetta/posts/PostPlugin;
 
-class TgPosts extends PostPlugin // PostPlugin extends PluginBase
+class CustomPlatform extends PostPlugin // PostPlugin extends PluginBase
 {
 	public function onEnable(): void
 	{
