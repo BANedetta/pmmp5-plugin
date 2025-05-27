@@ -1,5 +1,5 @@
 name: BANedetta
-version: 3.0.0-dev
+version: 3.0.0-beta
 api: 5.0.0
 main: Taskov1ch\BANedetta\BANedetta
 
