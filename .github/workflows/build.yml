@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-plugin:
-    uses: BANedetta/plugin-builder/.github/workflows/build.yml@main
+    uses: BANedetta/pmmp5-plugin-builder/.github/workflows/build.yml@main
     with:
       use_composer: false
       use_virions: true
