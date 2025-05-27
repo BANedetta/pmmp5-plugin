@@ -24,8 +24,8 @@ You can create your own third-party platform integration plugin by extending the
 
 namespace Example\Plugin;
 
-use Taskov1ch/BANedetta/BANedetta;
-use Taskov1ch/BANedetta/posts/PostPlugin;
+use Taskov1ch\BANedetta\BANedetta;
+use Taskov1ch\BANedetta\posts\PostPlugin;
 
 class CustomPlatform extends PostPlugin // PostPlugin extends PluginBase
 {
